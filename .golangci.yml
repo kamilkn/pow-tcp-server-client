@@ -1,0 +1,97 @@
+run:
+  timeout: 5m
+  tests: false
+issues:
+    exclude-dirs:
+      - /vendor/
+      - /docker/
+linters:
+  enable-all: true
+  disable:
+    - varcheck # Replaced by unused.
+    - deadcode # Replaced by unused.
+    - structcheck # Replaced by unused.
+    - maligned # Replaced by govet 'fieldalignment'.
+    - scopelint # Replaced by exportloopref.
+    - golint # Replaced by revive.
+    - godox # TODO tеmp, remove later
+    - exhaustivestruct
+    - exhaustruct
+    - tagliatelle
+    - nosnakecase
+    - interfacebloat
+    - depguard
+    - ireturn
+    - tagalign
+    - nonamedreturns
+    - lll
+    - nakedret
+    - execinquery # deprecated
+    - gomnd # deprecated
+  fast: false
+linters-settings:
+  gocritic:
+    enabled-tags:
+      - style
+      - experimental
+      - performance
+      - diagnostic
+      - opinionated
+
+  govet:
+    enable-all: true
+    disable:
+      - shadow
+      - fieldalignment
+
+  funlen:
+    lines: 120
+
+  cyclop:
+    max-complexity: 14
+
+  gomodguard:
+    blocked:
+      modules:
+        - github.com/urfave/cli:
+            recommendations:
+              - github.com/urfave/cli/v2
+        - github.com/golang-migrate/migrate:
+            recommendations:
+              - github.com/golang-migrate/migrate/v4
+        - github.com/streadway/amqp:
+            recommendations:
+              - github.com/rabbitmq/amqp091-go
+        - github.com/go-chi/chi:
+            recommendations:
+              - github.com/go-chi/chi/v5
+        - github.com/grpc-ecosystem/grpc-gateway:
+            recommendations:
+              - github.com/grpc-ecosystem/grpc-gateway/v2
+
+  varnamelen:
+    # The longest distance, in source lines, that is being considered a "small scope." (defaults to 5)
+    # Variables used in at most this many lines will be ignored.
+    max-distance: 12
+    # Ignore "ok" variables that hold the bool return value of a type assertion. (defaults to false)
+    ignore-type-assert-ok: true
+    # Ignore "ok" variables that hold the bool return value of a map index. (defaults to false)
+    ignore-map-index-ok: true
+    # Ignore "ok" variables that hold the bool return value of a channel receive. (defaults to false)
+    ignore-chan-recv-ok: true
+    # Optional list of variable names that should be ignored completely. (defaults to empty list)
+    ignore-names:
+      - ch
+      - db
+      - id
+      - ok
+      - ts
+      - tx
+      - r
+      - w
+    # Optional list of variable declarations that should be ignored completely. (defaults to empty list)
+    # Entries must be in the form of "<variable name> <type>" or "<variable name> *<type>" for
+    # variables, or "const <name>" for constants.
+    ignore-decls:
+      - w http.ResponseWriter
+      - r *http.Request
