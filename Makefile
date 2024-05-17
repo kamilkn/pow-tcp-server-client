@@ -34,6 +34,9 @@ test:
 fmt:
 	@go fmt ./...
 
+lint:
+	@golangci-lint run
+
 # used just for demp
 powtcp:
 	@docker-compose up	

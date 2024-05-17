@@ -48,6 +48,7 @@ A messaging is implemented in the [`message`](./internal/pkg/lib/message/message
 
 * [Go 1.22.3](https://go.dev/doc/install);
 * [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+* **Optional**: [golangci-lint](https://github.com/golangci/golangci-lint)
 
 ### Docker
 
@@ -76,6 +77,7 @@ Commands:
 
  test                  Run tests
  fmt                   Format code
+ lint                  Run Go linters
 ```
 
 ### Go
